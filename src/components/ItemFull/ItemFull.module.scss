@@ -1,0 +1,99 @@
+.svg {
+  margin: 0 auto;
+  display: block;
+
+  @media (max-width: 700px) {
+    display: none;
+  }
+}
+.svg_mob {
+  margin: 0 auto;
+  display: none;
+
+  @media (max-width: 700px) {
+    display: block;
+  }
+}
+
+.item {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  
+  @media (max-width: 700px) {
+    flex-direction: column;
+    align-items: center;
+  }
+  .image {
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 260px;
+    text-align: center;
+
+    @media (max-width: 700px) {
+      gap: 10px;
+    }
+
+    .title {
+      font-size: 25px;
+      font-weight: 900;
+      margin-bottom: 20px;
+    }
+
+    .selectors {
+      display: flex;
+      background-color: #f3f3f3;
+      border-radius: 10px;
+      flex-direction: column;
+      padding: 6px;
+      gap: 6px;
+    }
+
+    .selectors ul {
+      display: flex;
+      flex: 1 1;
+    }
+
+    .selectors ul li {
+      padding: 8px;
+      flex: 1 1;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    .selectors ul li.active {
+      background: #ffffff;
+      box-shadow: 0px 2px 4px rgb(0 0 0 / 4%);
+      border-radius: 5px;
+      cursor: auto;
+    }
+
+    .btn {
+      display: inline-block;
+      color: #fff;
+      background-color: #537EF5;
+      border-radius: 30px;
+      padding: 10px 20px;
+      min-width: 100px;
+      text-align: center;
+      cursor: pointer;
+      transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+      border: 1px solid transparent;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      user-select: none;
+
+    }
+  }
+}
