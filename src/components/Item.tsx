@@ -38,7 +38,7 @@ const Item: React.FC<ItemProps> = ({
     if (types) {
       activeTypesSet(types[0]);
     }
-  }, []);
+  }, [types]);
 
   const generateKey = (pre: string) => {
     return `${pre}_${new Date().getTime()}`;
@@ -75,13 +75,13 @@ const Item: React.FC<ItemProps> = ({
   };
 
   let countItem = 0;
-  let double = items
-    .map((i: { id: string; count: number }) => {
-      if (i.id === id) {
-        return (countItem += i.count);
-      }
-    })
-    .reverse()[0];
+
+  items.map((i: { id: string; count: number }) => {
+    if (i.id === id) {
+      countItem += i.count;
+    }
+    return countItem;
+  });
 
   return (
     <div className="pizza-block">

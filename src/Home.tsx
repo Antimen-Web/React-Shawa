@@ -21,9 +21,7 @@ const Home: React.FC = () => {
   const { activeCat, sortBy, categories, searchValue, sortByArr } =
     useAppSelector(selectFilter);
   const { elements, status } = useAppSelector(selectItems);
-  const getItems = () => {
-    dispatch(fetchItems({ activeCat, sortBy, searchValue }));
-  };
+
   const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
 
@@ -39,15 +37,15 @@ const Home: React.FC = () => {
       }
       isSearch.current = true;
     }
-  }, []);
+  }, [sortByArr, dispatch]);
 
   React.useEffect(() => {
     window.scroll(0, 0);
     if (!isSearch.current) {
-      getItems();
+      dispatch(fetchItems({ activeCat, sortBy, searchValue }));
     }
     isSearch.current = false;
-  }, [activeCat, sortBy, searchValue]);
+  }, [activeCat, sortBy, searchValue, dispatch]);
 
   React.useEffect(() => {
     if (isMounted.current) {
@@ -59,7 +57,11 @@ const Home: React.FC = () => {
       navigate(`?${queryString}`);
     }
     isMounted.current = true;
-  }, [activeCat, sortBy]);
+  }, [activeCat, sortBy, navigate]);
+
+  const generateKey = (pre: string) => {
+    return `${pre}_${new Date().getTime()}`;
+  };
 
   return (
     <div className="container">
@@ -78,7 +80,9 @@ const Home: React.FC = () => {
         <div className="content__items">
           {status === "pending"
             ? [...Array(8)].map((_, i) => <Sceleton key={i} />)
-            : elements.map((obj) => <Item {...obj} />)}
+            : elements.map((obj) => (
+                <Item {...obj} key={generateKey(obj.id)} />
+              ))}
         </div>
       )}
     </div>
