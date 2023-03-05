@@ -4,11 +4,11 @@ import {
   removeCount,
   clearCart,
   removeItem,
-  selectCart,
-} from "./components/redux/slices/cartSlice";
+} from "../redux/cart/slice";
 import CartEmpty from "./CartEmpty";
 import React from "react";
-import { useAppDispatch, useAppSelector } from "./components/redux/hooks";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { selectCart } from "../redux/cart/selectors";
 
 const Cart: React.FC = () => {
   const dispatch = useAppDispatch();

@@ -1,9 +1,9 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import "./scss/app.scss";
-import Page404 from "./Page404";
-import Home from "./Home";
-import Cart from "./Cart";
+import Page404 from "./pages/Page404";
+import Home from "./pages/Home";
+import Cart from "./pages/Cart";
 import ItemFull from "./components/ItemFull";
 import MainLayout from "./layouts/MainLayout";
 

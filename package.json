@@ -14,6 +14,7 @@
     "@types/node": "^18.14.4",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
+    "ahooks": "^3.7.5",
     "axios": "^1.2.3",
     "lodash.debounce": "^4.0.8",
     "qs": "^6.11.0",
@@ -27,7 +28,8 @@
     "sass": "^1.57.1",
     "scss": "^0.2.4",
     "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "why-did-you-update": "^0.1.1"
   },
   "scripts": {
     "start": "react-scripts start",

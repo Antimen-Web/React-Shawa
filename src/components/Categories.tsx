@@ -1,6 +1,7 @@
 import React from "react";
-import { selectFilter, setActiveCategory } from "./redux/slices/filterSlice";
-import { useAppDispatch, useAppSelector } from "./redux/hooks";
+import { setActiveCategory } from "../redux/filter/slice";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { selectFilter } from "../redux/filter/selectors";
 
 const Categories: React.FC = () => {
   const dispatch = useAppDispatch();

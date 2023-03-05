@@ -1,8 +1,8 @@
 import styles from "./Popup.module.scss";
-import { selectCart } from "../redux/slices/cartSlice";
 import { useSpring, animated } from "@react-spring/web";
 import React from "react";
-import { useAppSelector } from "../redux/hooks";
+import { useAppSelector } from "../../redux/hooks";
+import { selectCart } from "../../redux/cart/selectors";
 
 const Popup: React.FC = () => {
   const { popup, popupText } = useAppSelector(selectCart);

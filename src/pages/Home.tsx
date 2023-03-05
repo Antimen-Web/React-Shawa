@@ -1,19 +1,18 @@
 import React from "react";
 
-import Categories from "./components/Categories";
-import Sort from "./components/Sort";
-import Sceleton from "./components/Sceleton";
-import Item from "./components/Item";
+import Categories from "../components/Categories";
+import Sort from "../components/Sort";
+import Sceleton from "../components/Sceleton";
+import Item from "../components/Item";
 import qs from "qs";
 import { useNavigate } from "react-router-dom";
-import {
-  selectFilter,
-  setFilters,
-  SortByType,
-} from "./components/redux/slices/filterSlice";
+import { setFilters } from "../redux/filter/slice";
 
-import { fetchItems, selectItems } from "./components/redux/slices/itemsSlice";
-import { useAppDispatch, useAppSelector } from "./components/redux/hooks";
+import { fetchItems } from "../redux/items/slice";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { selectFilter } from "../redux/filter/selectors";
+import { selectItems } from "../redux/items/selectors";
+import { SortByType } from "../redux/filter/types";
 
 const Home: React.FC = () => {
   const navigate = useNavigate();

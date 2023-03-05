@@ -1,11 +1,21 @@
 import { Link } from "react-router-dom";
 import Search from "./Search";
-import { selectCart } from "./redux/slices/cartSlice";
 import React from "react";
-import { useAppSelector } from "./redux/hooks";
+import { useAppSelector } from "../redux/hooks";
+import { selectCart } from "../redux/cart/selectors";
 
 const Header: React.FC = () => {
   const { items, totalPrice } = useAppSelector(selectCart);
+
+  const isMounted = React.useRef(false);
+  React.useEffect(() => {
+    if (isMounted.current) {
+      const json = JSON.stringify(items);
+      localStorage.setItem("cart", json);
+    }
+    isMounted.current = true;
+  }, [items]);
+
   let x = 0;
   const itemsLength: number = items
     .map((i: { count: number }) => (x += i.count))
@@ -15,7 +25,7 @@ const Header: React.FC = () => {
       <div className="container">
         <div className="header__logo">
           <Link to="/">
-            <img width="38" src="/img/logo.png" alt="Shawa logo" />
+            <img src="/img/logo.png" alt="Shawa logo" />
           </Link>
           <div>
             <Link to="/">

@@ -1,14 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
-import { SortByType } from "./filterSlice";
-import { ItemProps } from "../../Item";
-import { RootState } from "../Store";
-
-type FetchItem = {
-  activeCat: number;
-  sortBy: SortByType;
-  searchValue: string;
-};
+import { ItemProps } from "../../components/Item";
+import { FetchItem, ItemsState, Status } from "./types";
 
 export const fetchItems = createAsyncThunk<ItemProps[], FetchItem>(
   "users/fetchItemsStatus",
@@ -23,17 +16,6 @@ export const fetchItems = createAsyncThunk<ItemProps[], FetchItem>(
     return data;
   }
 );
-
-enum Status {
-  PENDING = "pending",
-  FULFILLED = "fulfilled",
-  REJECTED = "rejected",
-}
-
-interface ItemsState {
-  elements: ItemProps[];
-  status: Status;
-}
 
 const initialState: ItemsState = {
   elements: [],
@@ -66,7 +48,5 @@ export const itemsSlice = createSlice({
     });
   },
 });
-
-export const selectItems = (state: RootState) => state.items;
 
 export default itemsSlice.reducer;

@@ -1,10 +1,8 @@
 import React from "react";
-import {
-  selectFilter,
-  setSortBy,
-  SortByType,
-} from "./redux/slices/filterSlice";
-import { useAppDispatch, useAppSelector } from "./redux/hooks";
+import { setSortBy } from "../redux/filter/slice";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { selectFilter } from "../redux/filter/selectors";
+import { SortByType } from "../redux/filter/types";
 
 const Sort: React.FC = () => {
   const dispatch = useAppDispatch();

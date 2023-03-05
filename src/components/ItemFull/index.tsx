@@ -2,15 +2,11 @@ import React from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import styles from "./ItemFull.module.scss";
-import {
-  addItem,
-  hidePopup,
-  selectCart,
-  showPopup,
-} from "../redux/slices/cartSlice";
+import { addItem, hidePopup, showPopup } from "../../redux/cart/slice";
 import SceletonItem from "./SceletonItem";
 import { ItemProps } from "../Item";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { selectCart } from "../../redux/cart/selectors";
 
 const ItemFull: React.FC = () => {
   const { id } = useParams();

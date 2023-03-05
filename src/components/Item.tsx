@@ -1,7 +1,8 @@
 import React from "react";
-import { addItem, selectCart } from "./redux/slices/cartSlice";
+import { addItem } from "../redux/cart/slice";
 import { Link } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "./redux/hooks";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { selectCart } from "../redux/cart/selectors";
 
 export type ItemProps = {
   key: string;
