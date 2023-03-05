@@ -1,6 +1,6 @@
 {
   "name": "react-shawa",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
   "dependencies": {
     "@react-spring/types": "^9.7.1",

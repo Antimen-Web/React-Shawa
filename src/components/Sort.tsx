@@ -12,18 +12,18 @@ const Sort: React.FC = () => {
   const [popup, showPopup] = React.useState<boolean>(false);
   const popupRef = React.useRef<HTMLDivElement>(null);
 
-  const handleClick = (event: MouseEvent) => {
+  const handleClick = React.useCallback((event: MouseEvent) => {
     if (popupRef.current && !event.composedPath().includes(popupRef.current)) {
-      showPopup(popup);
+      showPopup((popup) => popup && !popup);
     }
-  };
+  }, []);
 
   React.useEffect(() => {
     document.body.addEventListener("click", handleClick);
     return () => {
       document.body.removeEventListener("click", handleClick);
     };
-  }, []);
+  }, [handleClick]);
 
   return (
     <div className="sort" ref={popupRef}>

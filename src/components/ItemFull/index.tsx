@@ -23,21 +23,20 @@ const ItemFull: React.FC = () => {
   const [activeSizes, activeSizesSet] = React.useState<number>(0);
   let [description, setDescription] = React.useState<string>("");
 
-  async function fetchItem() {
-    try {
-      const { data } = await axios.get(
-        "https://63c9588d904f040a965c1451.mockapi.io/items/" + id
-      );
-      setItem(data);
-    } catch (error) {
-      console.log(error);
-      navigate("/");
-    }
-  }
-
   React.useEffect(() => {
+    async function fetchItem() {
+      try {
+        const { data } = await axios.get(
+          "https://63c9588d904f040a965c1451.mockapi.io/items/" + id
+        );
+        setItem(data);
+      } catch (error) {
+        console.log(error);
+        navigate("/");
+      }
+    }
     fetchItem();
-  }, []);
+  }, [id, navigate]);
 
   React.useEffect(() => {
     if (item) {
@@ -63,7 +62,7 @@ const ItemFull: React.FC = () => {
         setDescription(spicyName[activeSpicy] + ", " + item.weight + " g");
       }
     }
-  }, [activeSpicy, activeSizes, activeTypes]);
+  }, [activeSpicy, activeSizes, activeTypes, item, spicyName, typesName]);
 
   if (!item) {
     return <SceletonItem />;
@@ -110,13 +109,13 @@ const ItemFull: React.FC = () => {
   };
 
   let countItem = 0;
-  let double = items
-    .map((i: { id: string; count: number }) => {
-      if (i.id === id) {
-        return (countItem += i.count);
-      }
-    })
-    .reverse()[0];
+
+  items.map((i: { id: string; count: number }) => {
+    if (i.id === id) {
+      countItem += i.count;
+    }
+    return countItem;
+  });
 
   return (
     <div className={styles.item}>
