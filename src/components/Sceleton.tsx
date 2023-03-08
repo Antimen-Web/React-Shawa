@@ -1,7 +1,7 @@
 import React from "react";
 import ContentLoader from "react-content-loader";
 
-const Sceleton: React.FC = () => (
+export const Sceleton: React.FC = () => (
   <ContentLoader
     speed={2}
     width={280}
@@ -17,5 +17,3 @@ const Sceleton: React.FC = () => (
     <rect x="146" y="380" rx="15" ry="15" width="100" height="45" />
   </ContentLoader>
 );
-
-export default Sceleton;

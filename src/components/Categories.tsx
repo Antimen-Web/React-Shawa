@@ -3,7 +3,7 @@ import { setActiveCategory } from "../redux/filter/slice";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { selectFilter } from "../redux/filter/selectors";
 
-const Categories: React.FC = () => {
+export const Categories: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const { activeCat, categories } = useAppSelector(selectFilter);
@@ -24,5 +24,3 @@ const Categories: React.FC = () => {
     </div>
   );
 };
-
-export default Categories;

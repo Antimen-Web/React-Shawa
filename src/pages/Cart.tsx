@@ -5,10 +5,11 @@ import {
   clearCart,
   removeItem,
 } from "../redux/cart/slice";
-import CartEmpty from "./CartEmpty";
+import { CartEmpty } from "../components";
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { selectCart } from "../redux/cart/selectors";
+import { t } from "i18next";
 
 const Cart: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -56,7 +57,7 @@ const Cart: React.FC = () => {
                 strokeLinejoin="round"
               />
             </svg>
-            Cart
+            {t("cart")}
           </h2>
           <div onClick={() => dispatch(clearCart())} className="cart__clear">
             <svg
@@ -96,7 +97,7 @@ const Cart: React.FC = () => {
               />
             </svg>
 
-            <span>Clear cart</span>
+            <span>{t("cart_clear")}</span>
           </div>
         </div>
         <div className="content__cart">
@@ -199,11 +200,14 @@ const Cart: React.FC = () => {
           <div className="cart__bottom-details">
             <span>
               {" "}
-              Total products: <b>{itemsLength} pcs.</b>{" "}
+              {t("total_products")}{" "}
+              <b>
+                {itemsLength} {t("pcs")}
+              </b>{" "}
             </span>
             <span>
               {" "}
-              Total price: <b>{totalPrice} $</b>{" "}
+              {t("total_price")} <b>{totalPrice} $</b>{" "}
             </span>
           </div>
           <div className="cart__bottom-buttons">
@@ -227,10 +231,10 @@ const Cart: React.FC = () => {
                 />
               </svg>
 
-              <span>Return back</span>
+              <span>{t("return_back")}</span>
             </Link>
             <div className="button pay-btn">
-              <span>Pay now</span>
+              <span>{t("pay")}</span>
             </div>
           </div>
         </div>

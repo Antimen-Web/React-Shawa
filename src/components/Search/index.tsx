@@ -3,8 +3,9 @@ import styles from "./Search.module.scss";
 import { debounce } from "lodash";
 import { useAppDispatch } from "../../redux/hooks";
 import { setSearchValue } from "../../redux/filter/slice";
+import { t } from "i18next";
 
-const Search: React.FC = () => {
+export const Search: React.FC = () => {
   const dispatch = useAppDispatch();
   const inputRef = React.useRef<HTMLInputElement>(null);
   const [value, setValue] = React.useState<string>("");
@@ -25,12 +26,10 @@ const Search: React.FC = () => {
     <input
       ref={inputRef}
       className={styles.root}
-      placeholder="Search to:"
+      placeholder={t(`search`)}
       value={value}
       type="search"
       onChange={(event) => onClickClear(event)}
     />
   );
 };
-
-export default Search;

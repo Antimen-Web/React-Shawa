@@ -1,11 +1,22 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import "./scss/app.scss";
-import Page404 from "./pages/Page404";
 import Home from "./pages/Home";
-import Cart from "./pages/Cart";
-import ItemFull from "./components/ItemFull";
 import MainLayout from "./layouts/MainLayout";
+import Loadable from "react-loadable";
+
+const Cart = Loadable({
+  loader: () => import(/* webpackChunkName: "Cart" */ "./pages/Cart"),
+  loading: () => <div>Идёт загрузка...</div>,
+});
+const ItemFull = Loadable({
+  loader: () => import(/* webpackChunkName: "ItemFull" */ "./pages/ItemFull"),
+  loading: () => <div>Идёт загрузка...</div>,
+});
+const Page404 = Loadable({
+  loader: () => import(/* webpackChunkName: "Cart" */ "./pages/Page404"),
+  loading: () => <div>Идёт загрузка...</div>,
+});
 
 function App() {
   return (

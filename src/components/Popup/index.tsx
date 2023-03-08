@@ -3,8 +3,9 @@ import { useSpring, animated } from "@react-spring/web";
 import React from "react";
 import { useAppSelector } from "../../redux/hooks";
 import { selectCart } from "../../redux/cart/selectors";
+import { t } from "i18next";
 
-const Popup: React.FC = () => {
+export const Popup: React.FC = () => {
   const { popup, popupText } = useAppSelector(selectCart);
 
   const fadeOut = useSpring({
@@ -21,11 +22,9 @@ const Popup: React.FC = () => {
       }}
       className={popup ? styles.popup + " " + styles.active : styles.popup}
     >
-      <span>Added:</span>
+      <span>{t(`added`)}</span>
       <br />
       <span>{popupText}</span>
     </animated.div>
   );
 };
-
-export default Popup;

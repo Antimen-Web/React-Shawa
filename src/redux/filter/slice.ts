@@ -1,18 +1,20 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { FilterState, SortByType } from "./types";
+import { t } from "i18next";
+import "../../i18n";
 
 const initialState: FilterState = {
   sortByArr: [
-    { name: "popular ↓", sort: "rating", line: "desc" },
-    { name: "popular ↑", sort: "rating", line: "asc" },
-    { name: "price ↓", sort: "price", line: "desc" },
-    { name: "price ↑", sort: "price", line: "asc" },
-    { name: "alphabet ↓", sort: "title", line: "asc" },
-    { name: "alphabet ↑", sort: "title", line: "desc" },
+    { name: t("popular") + " ↓", sort: "rating", line: "desc" },
+    { name: t("popular") + " ↑", sort: "rating", line: "asc" },
+    { name: t("price") + " ↓", sort: "price", line: "desc" },
+    { name: t("price") + " ↑", sort: "price", line: "asc" },
+    { name: t("alphabet") + " ↓", sort: "title", line: "asc" },
+    { name: t("alphabet") + " ↑", sort: "title", line: "desc" },
   ],
-  categories: ["All", "Shawarma", "Greek", "Hotdog", "Pizza", "Burger"],
+  categories: t("categories", { returnObjects: true }),
   activeCat: 0,
-  sortBy: { name: "popular ↓", sort: "rating", line: "desc" },
+  sortBy: { name: t("popular") + " ↓", sort: "rating", line: "desc" },
   searchValue: "",
 };
 
@@ -36,10 +38,31 @@ export const filterSlice = createSlice({
       state.activeCat = Number(action.payload.activeCat);
       state.sortBy = action.payload.sortBy;
     },
+    setLangFilters(state) {
+      state.sortByArr = [
+        { name: t("popular") + " ↓", sort: "rating", line: "desc" },
+        { name: t("popular") + " ↑", sort: "rating", line: "asc" },
+        { name: t("price") + " ↓", sort: "price", line: "desc" },
+        { name: t("price") + " ↑", sort: "price", line: "asc" },
+        { name: t("alphabet") + " ↓", sort: "title", line: "asc" },
+        { name: t("alphabet") + " ↑", sort: "title", line: "desc" },
+      ];
+      state.categories = t("categories", { returnObjects: true });
+      state.sortBy = {
+        name: t("popular") + " ↓",
+        sort: "rating",
+        line: "desc",
+      };
+    },
   },
 });
 
-export const { setActiveCategory, setSortBy, setSearchValue, setFilters } =
-  filterSlice.actions;
+export const {
+  setActiveCategory,
+  setSortBy,
+  setSearchValue,
+  setFilters,
+  setLangFilters,
+} = filterSlice.actions;
 
 export default filterSlice.reducer;

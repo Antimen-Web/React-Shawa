@@ -3,8 +3,9 @@ import { setSortBy } from "../redux/filter/slice";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { selectFilter } from "../redux/filter/selectors";
 import { SortByType } from "../redux/filter/types";
+import { t } from "i18next";
 
-const Sort: React.FC = () => {
+export const Sort: React.FC = () => {
   const dispatch = useAppDispatch();
   const { sortByArr, sortBy } = useAppSelector(selectFilter);
   const [popup, showPopup] = React.useState<boolean>(false);
@@ -38,7 +39,7 @@ const Sort: React.FC = () => {
             fill="#2C2C2C"
           />
         </svg>
-        <b>Sort by:</b>
+        <b>{t(`sort_by`)}</b>
         <span onClick={() => showPopup(!popup)}>{sortBy.name}</span>
       </div>
       <div className={popup ? "sort__popup" : "sort__popup collapsed"}>
@@ -60,5 +61,3 @@ const Sort: React.FC = () => {
     </div>
   );
 };
-
-export default Sort;

@@ -1,12 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { getCartFromLS } from "../../utils/getCartFromLS";
 import { CartState, Item } from "./types";
+import { t } from "i18next";
+import "../../i18n";
 
 const { items, totalPrice } = getCartFromLS();
 
 const initialState: CartState = {
-  typesName: ["thin", "traditional"],
-  spicyName: ["spicy", "non-spicy"],
+  typesName: t("typesName", { returnObjects: true }),
+  spicyName: t("spicyName", { returnObjects: true }),
   items: items,
   totalPrice: totalPrice,
   popup: false,
@@ -101,6 +103,10 @@ export const cartSlice = createSlice({
       state.popup = false;
       state.popupText = "";
     },
+    setLangCart(state) {
+      state.typesName = t("typesName", { returnObjects: true });
+      state.spicyName = t("spicyName", { returnObjects: true });
+    },
   },
 });
 
@@ -112,6 +118,7 @@ export const {
   removeItem,
   showPopup,
   hidePopup,
+  setLangCart,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

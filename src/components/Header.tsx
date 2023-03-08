@@ -1,11 +1,15 @@
 import { Link } from "react-router-dom";
-import Search from "./Search";
+import { Search } from "./Search";
 import React from "react";
 import { useAppSelector } from "../redux/hooks";
 import { selectCart } from "../redux/cart/selectors";
+import { useTranslation } from "react-i18next";
+import { LangSwitcher } from "./LangSwitcher";
 
-const Header: React.FC = () => {
+export const Header: React.FC = () => {
   const { items, totalPrice } = useAppSelector(selectCart);
+
+  const { t } = useTranslation();
 
   const isMounted = React.useRef(false);
   React.useEffect(() => {
@@ -20,21 +24,23 @@ const Header: React.FC = () => {
   const itemsLength: number = items
     .map((i: { count: number }) => (x += i.count))
     .reverse()[0];
+
   return (
     <div className="header">
       <div className="container">
         <div className="header__logo">
           <Link to="/">
-            <img src="/img/logo.png" alt="Shawa logo" />
+            <img src="/img/logo.png" alt="{t(`logo_alt`)}" />
           </Link>
           <div>
             <Link to="/">
-              <h1>React Shawa</h1>
+              <h1>{t(`title`)}</h1>
             </Link>
-            <p>most delicios in the world!</p>
+            <p>{t(`description`)}</p>
           </div>
         </div>
         <Search />
+        <LangSwitcher />
         <div className="header__cart">
           <Link to="/cart/" className="button button--cart">
             <span>{totalPrice} $</span>
@@ -75,5 +81,3 @@ const Header: React.FC = () => {
     </div>
   );
 };
-
-export default Header;

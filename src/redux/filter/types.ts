@@ -1,11 +1,5 @@
 export type SortByType = {
-  name:
-    | "popular ↓"
-    | "popular ↑"
-    | "price ↓"
-    | "price ↑"
-    | "alphabet ↓"
-    | "alphabet ↑";
+  name: string;
   sort: "rating" | "price" | "title";
   line: "desc" | "asc";
 };

@@ -1,9 +1,6 @@
 import React from "react";
 
-import Categories from "../components/Categories";
-import Sort from "../components/Sort";
-import Sceleton from "../components/Sceleton";
-import Item from "../components/Item";
+import { Item, Categories, Sort, Sceleton } from "../components";
 import qs from "qs";
 import { useNavigate } from "react-router-dom";
 import { setFilters } from "../redux/filter/slice";
@@ -13,6 +10,7 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { selectFilter } from "../redux/filter/selectors";
 import { selectItems } from "../redux/items/selectors";
 import { SortByType } from "../redux/filter/types";
+import { t } from "i18next";
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -72,8 +70,8 @@ const Home: React.FC = () => {
 
       {status === "rejected" ? (
         <div>
-          <h2>Something went wrong 😕</h2>
-          <p>try again later</p>
+          <h2>{t("home_rejected1")}</h2>
+          <p>{t("home_rejected2")}</p>
         </div>
       ) : (
         <div className="content__items">

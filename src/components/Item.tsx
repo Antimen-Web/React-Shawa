@@ -3,6 +3,7 @@ import { addItem } from "../redux/cart/slice";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { selectCart } from "../redux/cart/selectors";
+import { t } from "i18next";
 
 export type ItemProps = {
   key: string;
@@ -17,7 +18,7 @@ export type ItemProps = {
   weight: number;
 };
 
-const Item: React.FC<ItemProps> = ({
+export const Item: React.FC<ItemProps> = ({
   id,
   title,
   image,
@@ -125,14 +126,16 @@ const Item: React.FC<ItemProps> = ({
                 onClick={() => activeSizesSet(value)}
                 className={activeSizes === value ? "active" : ""}
               >
-                {value} cm.
+                {value} {t(`cm`)}
               </li>
             ))}
           </ul>
         )}
       </div>
       <div className="pizza-block__bottom">
-        <div className="pizza-block__price">from {price}$</div>
+        <div className="pizza-block__price">
+          {t(`from`)} {price}$
+        </div>
         <div
           onClick={onClickAdd}
           className="button button--outline button--add"
@@ -149,12 +152,10 @@ const Item: React.FC<ItemProps> = ({
               fill="white"
             />
           </svg>
-          <span>Add</span>
+          <span>{t(`add`)}</span>
           <i>{countItem}</i>
         </div>
       </div>
     </div>
   );
 };
-
-export default Item;

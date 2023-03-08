@@ -4,9 +4,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import styles from "./ItemFull.module.scss";
 import { addItem, hidePopup, showPopup } from "../../redux/cart/slice";
 import SceletonItem from "./SceletonItem";
-import { ItemProps } from "../Item";
+import { ItemProps } from "../../components";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { selectCart } from "../../redux/cart/selectors";
+import { t } from "i18next";
 
 const ItemFull: React.FC = () => {
   const { id } = useParams();
@@ -52,10 +53,10 @@ const ItemFull: React.FC = () => {
             activeSizes +
             ", " +
             item.weight +
-            " g"
+            t("gram")
         );
       } else {
-        setDescription(spicyName[activeSpicy] + ", " + item.weight + " g");
+        setDescription(spicyName[activeSpicy] + ", " + item.weight + t("gram"));
       }
     }
   }, [activeSpicy, activeSizes, activeTypes, item, spicyName, typesName]);
@@ -158,7 +159,7 @@ const ItemFull: React.FC = () => {
                   onClick={() => activeSizesSet(value)}
                   className={activeSizes === value ? styles.active : ""}
                 >
-                  {value} cm.
+                  {value} {t("cm")}
                 </li>
               ))}
             </ul>
@@ -166,7 +167,7 @@ const ItemFull: React.FC = () => {
         </div>
         <div>
           <div className={styles.btn} onClick={onClickAdd}>
-            Add to cart for {item.price}$
+            {t("add_ItemFull")} {item.price}$
           </div>
         </div>
       </div>
