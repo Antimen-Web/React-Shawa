@@ -41,10 +41,9 @@
     "typescript": "^4.9.5"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "build": "netlify-lambda build functions",
+    "start": "netlify-lambda serve functions",
+    "deploy": "netlify-lambda deploy functions"
   },
   "eslintConfig": {
     "extends": [

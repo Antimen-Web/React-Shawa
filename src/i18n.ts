@@ -7,6 +7,7 @@ import de from "./i18n/de.json";
 import ja from "./i18n/ja.json";
 import uk from "./i18n/uk.json";
 import vi from "./i18n/vi.json";
+import be from "./i18n/be.json";
 
 export const resources = {
   en: {
@@ -26,6 +27,9 @@ export const resources = {
   },
   vi: {
     translation: vi,
+  },
+  be: {
+    translation: be,
   },
 } as const;
 
