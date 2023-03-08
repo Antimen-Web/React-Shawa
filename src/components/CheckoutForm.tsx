@@ -29,6 +29,8 @@ export const CheckoutForm: React.FC = () => {
 
     const result = await stripe.createToken(cardElement);
 
+    console.log("kek" + result);
+
     if (result.error) {
       setPaymentError(result.error.message);
       setPaymentSuccess(false);
