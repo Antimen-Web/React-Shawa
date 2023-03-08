@@ -4,6 +4,7 @@ import "./scss/app.scss";
 import Home from "./pages/Home";
 import MainLayout from "./layouts/MainLayout";
 import Loadable from "react-loadable";
+import PaymentPage from "./pages/PaymentPage";
 
 const Cart = Loadable({
   loader: () => import(/* webpackChunkName: "Cart" */ "./pages/Cart"),
@@ -25,6 +26,7 @@ function App() {
         <Route path="" element={<Home />} />
         <Route path="cart/" element={<Cart />} />
         <Route path="item/:id" element={<ItemFull />} />
+        <Route path="payment/" element={<PaymentPage />} />
         <Route path="*" element={<Page404 />} />
       </Route>
     </Routes>

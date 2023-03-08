@@ -6,6 +6,8 @@
     "@react-spring/types": "^9.7.1",
     "@react-spring/web": "^9.7.1",
     "@reduxjs/toolkit": "^1.9.1",
+    "@stripe/react-stripe-js": "^1.16.5",
+    "@stripe/stripe-js": "^1.48.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -19,6 +21,7 @@
     "@types/react-i18next": "^8.1.0",
     "@types/react-loadable": "^5.5.6",
     "axios": "^1.2.3",
+    "dotenv": "^16.0.3",
     "i18next": "^22.4.10",
     "i18next-browser-languagedetector": "^7.0.1",
     "lodash.debounce": "^4.0.8",
@@ -34,6 +37,7 @@
     "react-scripts": "5.0.1",
     "sass": "^1.57.1",
     "scss": "^0.2.4",
+    "stripe": "^11.13.0",
     "typescript": "^4.9.5"
   },
   "scripts": {
@@ -59,5 +63,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "netlify-lambda": "^2.0.16"
   }
 }

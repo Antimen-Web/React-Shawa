@@ -233,9 +233,11 @@ const Cart: React.FC = () => {
 
               <span>{t("return_back")}</span>
             </Link>
-            <div className="button pay-btn">
-              <span>{t("pay")}</span>
-            </div>
+            <Link to="/payment/">
+              <div className="button pay-btn">
+                <span>{t("pay")}</span>
+              </div>
+            </Link>
           </div>
         </div>
       </div>
