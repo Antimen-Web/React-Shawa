@@ -32,6 +32,7 @@ export const CheckoutForm: React.FC = () => {
     if (result.error) {
       setPaymentError(result.error.message);
       setPaymentSuccess(false);
+      console.log("ошибка result");
     } else {
       setPaymentError(undefined);
       setPaymentSuccess(true);
