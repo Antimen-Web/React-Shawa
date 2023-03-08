@@ -41,6 +41,7 @@ export const CheckoutForm: React.FC = () => {
 
       // Отправить токен на сервер для создания платежа
       const token = result.token.id;
+      console.log("token" + token);
       // Отправить информацию об оплаченных товарах и их общей стоимости на сервер вместе с токеном
       const response = await axios.post("/functions/payment", {
         token,
