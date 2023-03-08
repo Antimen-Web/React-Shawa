@@ -43,11 +43,14 @@ export const CheckoutForm: React.FC = () => {
       const token = result.token.id;
       console.log("token" + token);
       // Отправить информацию об оплаченных товарах и их общей стоимости на сервер вместе с токеном
-      const response = await axios.post("/opt/build/repo/.netlify/functions", {
-        token,
-        items,
-        totalPrice,
-      });
+      const response = await axios.post(
+        "/opt/build/repo/.netlify/functions/payment",
+        {
+          token,
+          items,
+          totalPrice,
+        }
+      );
 
       if (response.data.success) {
         // Оплата прошла успешно
