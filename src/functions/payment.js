@@ -5,19 +5,11 @@ exports.handler = async function (event, context) {
     const data = JSON.parse(event.body);
     const { token, items, totalPrice } = data;
 
-    // получаем payment_method из токена
-    const paymentMethod = await stripe.paymentMethods.create({
-      type: "card",
-      card: {
-        token: "токен_карты",
-      },
-    });
-
     console.log(
       "Creating payment intent with items:",
       items,
-      "payment_method ",
-      paymentMethod.id,
+      "token",
+      token,
       "and total:",
       totalPrice
     );
@@ -26,7 +18,13 @@ exports.handler = async function (event, context) {
       amount: parseInt(totalPrice) * 100,
       currency: "usd",
       description: "Payment for items",
-      payment_method: paymentMethod.id,
+      automatic_payment_methods: { enabled: true },
+      payment_method_data: {
+        type: "card",
+        card: {
+          token: token,
+        },
+      },
       confirm: true,
       metadata: {
         items: JSON.stringify(items),
