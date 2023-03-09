@@ -1,4 +1,2 @@
 [build]
-base = "react-shawa/"
 command = "npm run build"
-functions = "./build-out"
