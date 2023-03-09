@@ -21,9 +21,7 @@ exports.handler = async function (event, context) {
       payment_method_types: ["card"],
       payment_method_data: {
         type: "card",
-        card: {
-          token: token,
-        },
+        card: token,
       },
       confirm: true,
       return_url: "https://bespoke-scone-ed21f0.netlify.app/",
