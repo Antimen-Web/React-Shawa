@@ -41,9 +41,9 @@
     "typescript": "^4.9.5"
   },
   "scripts": {
-    "build": "netlify-lambda build functions",
-    "start": "netlify-lambda serve functions",
-    "deploy": "netlify-lambda deploy functions"
+    "build": "netlify-lambda build src/functions build-out",
+    "start": "netlify-lambda serve /",
+    "deploy": "netlify-lambda deploy /"
   },
   "eslintConfig": {
     "extends": [

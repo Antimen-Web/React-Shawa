@@ -9,7 +9,7 @@
 /coverage
 
 # production
-/functions
+/src/functions
 
 # misc
 .DS_Store
