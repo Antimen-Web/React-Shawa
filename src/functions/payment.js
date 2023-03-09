@@ -25,7 +25,9 @@ exports.handler = async function (event, context) {
           token: token,
         },
       },
-      confirm: true,
+      confirm: {
+        return_url: "https://bespoke-scone-ed21f0.netlify.app/",
+      },
       metadata: {
         items: JSON.stringify(items),
       },
