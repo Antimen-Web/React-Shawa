@@ -18,7 +18,7 @@ exports.handler = async function (event, context) {
       amount: parseInt(totalPrice) * 100,
       currency: "usd",
       description: "Payment for items",
-      automatic_payment_methods: { enabled: true },
+      payment_method_types: ["card"],
       payment_method_data: {
         type: "card",
         card: {
