@@ -18,7 +18,12 @@ exports.handler = async function (event, context) {
       amount: parseInt(totalPrice),
       currency: "usd",
       description: "Payment for items",
-      payment_method: token,
+      payment_method_data: {
+        type: "card",
+        card: {
+          token: token,
+        },
+      },
       confirm: true,
       metadata: {
         items: JSON.stringify(items),
