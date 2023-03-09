@@ -17,7 +17,7 @@ exports.handler = async function (event, context) {
       "Creating payment intent with items:",
       items,
       "payment_method ",
-      paymentMethod,
+      paymentMethod.id,
       "and total:",
       totalPrice
     );
@@ -26,7 +26,7 @@ exports.handler = async function (event, context) {
       amount: parseInt(totalPrice) * 100,
       currency: "usd",
       description: "Payment for items",
-      payment_method: paymentMethod,
+      payment_method: paymentMethod.id,
       confirm: true,
       metadata: {
         items: JSON.stringify(items),
