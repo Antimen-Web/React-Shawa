@@ -1,7 +1,5 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
-console.log(process.env.STRIPE_SECRET_KEY);
-
 exports.handler = async function (event, context) {
   try {
     const data = JSON.parse(event.body);
@@ -10,17 +8,21 @@ exports.handler = async function (event, context) {
     console.log(
       "Creating payment intent with items:",
       items,
+      "token",
+      token,
       "and total:",
       totalPrice
     );
 
     const paymentIntent = await stripe.paymentIntents.create({
-      items: items,
-      amount: totalPrice,
+      amount: parseInt(totalPrice),
       currency: "usd",
       description: "Payment for items",
       payment_method: token,
       confirm: true,
+      metadata: {
+        items: JSON.stringify(items),
+      },
     });
 
     console.log("Payment intent created:", paymentIntent);
