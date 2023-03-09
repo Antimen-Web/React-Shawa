@@ -3,28 +3,30 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 exports.handler = async function (event, context) {
   try {
     const data = JSON.parse(event.body);
-    const { token, items, totalPrice } = data;
+    const { items, totalPrice } = data;
 
     console.log(
       "Creating payment intent with items:",
       items,
-      "token",
-      token,
       "and total:",
       totalPrice
     );
+
+    const paymentMethod = await stripe.paymentMethods.create({
+      type: "card",
+      card: {
+        number: "4242424242424242",
+        exp_month: 12,
+        exp_year: 2025,
+        cvc: "123",
+      },
+    });
 
     const paymentIntent = await stripe.paymentIntents.create({
       amount: parseInt(totalPrice) * 100,
       currency: "usd",
       description: "Payment for items",
-      payment_method_types: ["card"],
-      payment_method_data: {
-        type: "card",
-        card: {
-          token: token,
-        },
-      },
+      payment_method: paymentMethod.id,
       confirm: true,
       return_url: "https://bespoke-scone-ed21f0.netlify.app/",
       metadata: {
