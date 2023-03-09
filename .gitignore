@@ -9,7 +9,8 @@
 /coverage
 
 # production
-/functions
+/build
+/bar-lambda
 
 # misc
 .DS_Store
