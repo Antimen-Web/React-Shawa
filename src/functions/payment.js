@@ -4,12 +4,16 @@ exports.handler = async function (event, context) {
   try {
     const data = JSON.parse(event.body);
     const { items, totalPrice } = data;
+    const totalPriceNumber = parseInt(totalPrice);
+    if (isNaN(totalPriceNumber)) {
+      throw new Error("Invalid total price");
+    }
 
     console.log(
       "Creating payment intent with items:",
       items,
       "and total:",
-      totalPrice
+      totalPriceNumber
     );
 
     const paymentMethod = await stripe.paymentMethods.create({
@@ -23,7 +27,7 @@ exports.handler = async function (event, context) {
     });
 
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: parseInt(totalPrice) * 100,
+      amount: totalPriceNumber * 100,
       currency: "usd",
       description: "Payment for items",
       payment_method: paymentMethod.id,
@@ -47,7 +51,7 @@ exports.handler = async function (event, context) {
 
     return {
       statusCode: 400,
-      body: JSON.stringify({ error: error.message }),
+      body: JSON.stringify({ error: "Failed to create payment intent" }),
     };
   }
 };
