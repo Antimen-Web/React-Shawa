@@ -1,10 +1,11 @@
+const { toNumber } = require("lodash");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 exports.handler = async function (event, context) {
   try {
     const data = JSON.parse(event.body);
     const { items, totalPrice } = data;
-    const totalPriceNumber = parseInt(totalPrice);
+    const totalPriceNumber = Number(totalPrice);
     if (isNaN(totalPriceNumber)) {
       throw new Error("Invalid total price");
     }
