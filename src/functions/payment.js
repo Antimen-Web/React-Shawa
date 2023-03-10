@@ -1,17 +1,17 @@
-const { toNumber } = require("lodash");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 exports.handler = async function (event, context) {
   try {
     const data = JSON.parse(event.body);
-    const { items, totalPrice } = data;
-    const totalPriceNumber = Number(totalPrice) * 100;
+    const { items } = data;
+    const totalPrice =
+      items.reduce((acc, item) => acc + item.price * item.count, 0) * 100;
 
     console.log(
       "Creating payment intent with items:",
       items,
       "and total:",
-      totalPriceNumber
+      totalPrice
     );
 
     const paymentMethod = await stripe.paymentMethods.create({
@@ -29,7 +29,7 @@ exports.handler = async function (event, context) {
     }
 
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: 1000,
+      amount: totalPrice,
       currency: "usd",
       description: "Payment for items",
       payment_method: paymentMethod.id,
