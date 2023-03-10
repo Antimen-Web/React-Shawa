@@ -5,9 +5,9 @@ exports.handler = async function (event, context) {
   try {
     const data = JSON.parse(event.body);
     const { items, totalPrice } = data;
-    const totalPriceNumber = Number(totalPrice);
+    const totalPriceNumber = parseFloat(totalPrice);
     if (isNaN(totalPriceNumber)) {
-      throw new Error("Invalid total price");
+      throw new Error("Invalid total price float");
     }
 
     console.log(
