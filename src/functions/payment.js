@@ -5,11 +5,13 @@ exports.handler = async function (event, context) {
     const data = JSON.parse(event.body);
     const { items, totalPrice } = data;
 
+    const totalPriceNumber = typeof totalPrice === "number" ? totalPrice : 0;
+
     console.log(
       "Creating payment intent with items:",
       items,
       "and total is type:",
-      typeof totalPrice
+      typeof totalPriceNumber
     );
 
     const paymentMethod = await stripe.paymentMethods.create({
@@ -27,7 +29,7 @@ exports.handler = async function (event, context) {
     }
 
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: Number(totalPrice),
+      amount: totalPriceNumber,
       currency: "usd",
       description: "Payment for items",
       payment_method: paymentMethod.id,
