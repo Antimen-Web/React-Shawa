@@ -5,10 +5,7 @@ exports.handler = async function (event, context) {
   try {
     const data = JSON.parse(event.body);
     const { items, totalPrice } = data;
-    const totalPriceNumber = parseFloat(totalPrice);
-    if (isNaN(totalPriceNumber)) {
-      throw new Error("Invalid total price float");
-    }
+    const totalPriceNumber = Number(totalPrice);
 
     console.log(
       "Creating payment intent with items:",
