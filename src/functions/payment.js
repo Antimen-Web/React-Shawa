@@ -26,6 +26,10 @@ exports.handler = async function (event, context) {
       },
     });
 
+    if (!paymentMethod || !paymentMethod.id) {
+      throw new Error("Failed to create payment method");
+    }
+
     const paymentIntent = await stripe.paymentIntents.create({
       amount: totalPriceNumber * 100,
       currency: "usd",
@@ -37,6 +41,10 @@ exports.handler = async function (event, context) {
         items: JSON.stringify(items),
       },
     });
+
+    if (!paymentIntent || !paymentIntent.id) {
+      throw new Error("Failed to create payment intent");
+    }
 
     console.log("Payment intent created:", paymentIntent);
 
@@ -51,7 +59,9 @@ exports.handler = async function (event, context) {
 
     return {
       statusCode: 400,
-      body: JSON.stringify({ error: "Failed to create payment intent" }),
+      body: JSON.stringify({
+        error: error.message || "Failed to create payment intent",
+      }),
     };
   }
 };
