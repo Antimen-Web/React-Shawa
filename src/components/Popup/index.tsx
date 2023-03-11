@@ -20,7 +20,7 @@ export const Popup: React.FC = () => {
       style={{
         ...fadeOut,
       }}
-      className={popup ? styles.popup + " " + styles.active : styles.popup}
+      className={`${styles.popup} ${popup && styles.active}`}
     >
       <span>{t(`added`)}</span>
       <br />

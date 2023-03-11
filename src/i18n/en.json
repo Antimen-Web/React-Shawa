@@ -22,6 +22,7 @@
   "total_price": "Total price:",
   "return_back": "Return back",
   "pay": "Pay now",
+  "pay_success": "Payment was successful",
   "home_rejected1": "Something went wrong \uD83D\uDE15",
   "home_rejected2": "try again later",
   "page404": "404 Page not found",

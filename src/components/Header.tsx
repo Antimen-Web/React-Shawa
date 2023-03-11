@@ -1,15 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Search } from "./Search";
 import React from "react";
 import { useAppSelector } from "../redux/hooks";
 import { selectCart } from "../redux/cart/selectors";
-import { useTranslation } from "react-i18next";
+import { t } from "i18next";
 import { LangSwitcher } from "./LangSwitcher";
+import { calcItemsLength } from "../utils/";
 
 export const Header: React.FC = () => {
   const { items, totalPrice } = useAppSelector(selectCart);
-
-  const { t } = useTranslation();
+  const location = useLocation();
 
   const isMounted = React.useRef(false);
   React.useEffect(() => {
@@ -19,11 +19,6 @@ export const Header: React.FC = () => {
     }
     isMounted.current = true;
   }, [items]);
-
-  let x = 0;
-  const itemsLength: number = items
-    .map((i: { count: number }) => (x += i.count))
-    .reverse()[0];
 
   return (
     <div className="header">
@@ -39,7 +34,7 @@ export const Header: React.FC = () => {
             <p>{t(`description`)}</p>
           </div>
         </div>
-        <Search />
+        {location.pathname === "/" && <Search />}
         <LangSwitcher />
         <div className="header__cart">
           <Link to="/cart/" className="button button--cart">
@@ -74,7 +69,7 @@ export const Header: React.FC = () => {
                 strokeLinejoin="round"
               />
             </svg>
-            <span>{itemsLength}</span>
+            <span>{calcItemsLength(items)}</span>
           </Link>
         </div>
       </div>

@@ -11,6 +11,7 @@ import { selectFilter } from "../redux/filter/selectors";
 import { selectItems } from "../redux/items/selectors";
 import { SortByType } from "../redux/filter/types";
 import { t } from "i18next";
+import { generateKey } from "../utils/";
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -19,29 +20,27 @@ const Home: React.FC = () => {
     useAppSelector(selectFilter);
   const { elements, status } = useAppSelector(selectItems);
 
-  const isSearch = React.useRef(false);
+  const isFromUrl = React.useRef(false);
   const isMounted = React.useRef(false);
 
   React.useEffect(() => {
-    if (window.location.search) {
-      const params = qs.parse(window.location.search.substring(1));
-      const sortBy = sortByArr.find(
-        (obj: SortByType) =>
-          obj.sort === params.sortBy && obj.line === params.order
-      );
-      if (typeof params.activeCat === "string" && sortBy) {
-        dispatch(setFilters({ activeCat: params.activeCat, sortBy }));
-      }
-      isSearch.current = true;
+    const params = qs.parse(window.location.search.substring(1));
+    const sortBy = sortByArr.find(
+      (obj: SortByType) =>
+        obj.sort === params.sortBy && obj.line === params.order
+    );
+    if (typeof params.activeCat === "string" && sortBy) {
+      dispatch(setFilters({ activeCat: params.activeCat, sortBy }));
     }
+    isFromUrl.current = Boolean(window.location.search);
   }, [sortByArr, dispatch]);
 
   React.useEffect(() => {
     window.scroll(0, 0);
-    if (!isSearch.current) {
+    if (!isFromUrl.current) {
       dispatch(fetchItems({ activeCat, sortBy, searchValue }));
     }
-    isSearch.current = false;
+    isFromUrl.current = false;
   }, [activeCat, sortBy, searchValue, dispatch]);
 
   React.useEffect(() => {
@@ -55,10 +54,6 @@ const Home: React.FC = () => {
     }
     isMounted.current = true;
   }, [activeCat, sortBy, navigate]);
-
-  const generateKey = (pre: string) => {
-    return `${pre}_${new Date().getTime()}`;
-  };
 
   return (
     <div className="container">

@@ -5,18 +5,26 @@ import Home from "./pages/Home";
 import MainLayout from "./layouts/MainLayout";
 import Loadable from "react-loadable";
 import PaymentPage from "./pages/PaymentPage";
+import { CirclesWithBar } from "react-loader-spinner";
+import Page404 from "./pages/Page404";
+import ItemFull from "./pages/ItemFull";
 
 const Cart = Loadable({
   loader: () => import(/* webpackChunkName: "Cart" */ "./pages/Cart"),
-  loading: () => <div>Идёт загрузка...</div>,
-});
-const ItemFull = Loadable({
-  loader: () => import(/* webpackChunkName: "ItemFull" */ "./pages/ItemFull"),
-  loading: () => <div>Идёт загрузка...</div>,
-});
-const Page404 = Loadable({
-  loader: () => import(/* webpackChunkName: "Cart" */ "./pages/Page404"),
-  loading: () => <div>Идёт загрузка...</div>,
+  loading: () => (
+    <CirclesWithBar
+      height="100"
+      width="100"
+      color="#537EF5"
+      wrapperStyle={{ justifyContent: "center" }}
+      wrapperClass=""
+      visible={true}
+      outerCircleColor=""
+      innerCircleColor=""
+      barColor=""
+      ariaLabel="circles-with-bar-loading"
+    />
+  ),
 });
 
 function App() {

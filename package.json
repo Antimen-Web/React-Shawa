@@ -31,6 +31,7 @@
     "react-dom": "^18.2.0",
     "react-i18next": "^12.2.0",
     "react-loadable": "^5.5.0",
+    "react-loader-spinner": "^5.3.4",
     "react-loading-skeleton": "^3.1.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.7.0",

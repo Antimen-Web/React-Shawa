@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import axios from "axios";
-import { useAppSelector } from "../redux/hooks";
+import { useAppSelector } from "../../redux/hooks";
+import styles from "./CheckoutForm.module.scss";
+import { useNavigate } from "react-router-dom";
+import { t } from "i18next";
 
 export const CheckoutForm: React.FC = () => {
   const [paymentError, setPaymentError] = useState<string | undefined>(
@@ -13,6 +16,7 @@ export const CheckoutForm: React.FC = () => {
 
   const stripe = useStripe();
   const elements = useElements();
+  const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -29,24 +33,22 @@ export const CheckoutForm: React.FC = () => {
 
     const result = await stripe.createToken(cardElement);
 
-    console.log("kek" + result);
-
     if (result.error) {
       setPaymentError(result.error.message);
       setPaymentSuccess(false);
-      console.log("ошибка result");
     } else {
       setPaymentError(undefined);
       setPaymentSuccess(true);
+      setTimeout(() => navigate("/"), 1000);
 
       // Отправить токен на сервер для создания платежа
-      const token = result.token.id;
+      const token = result.token;
       console.log("token" + token);
       // Отправить информацию об оплаченных товарах и их общей стоимости на сервер вместе с токеном
-      const response = await axios.post("/bar-lambda/payment.js", {
+      const response = await axios.post("/.netlify/functions/payment", {
         token,
         items,
-        totalPrice,
+        totalPrice: Number(totalPrice * 100),
       });
 
       if (response.data.success) {
@@ -60,11 +62,17 @@ export const CheckoutForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <CardElement />
-      <button type="submit">Оплатить</button>
-      {paymentError && <div>{paymentError}</div>}
-      {paymentSuccess && <div>Оплата прошла успешно</div>}
-    </form>
+    <div className="container">
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <CardElement />
+        <button className="button pay-btn" type="submit">
+          {t("pay")}
+        </button>
+        {paymentError && <div className={styles.center}>{paymentError}</div>}
+        {paymentSuccess && (
+          <div className={styles.center}>{t("pay_success")}</div>
+        )}
+      </form>
+    </div>
   );
 };

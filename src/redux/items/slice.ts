@@ -1,19 +1,24 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
-import { ItemProps } from "../../components/Item";
+import { ItemProps } from "../../components/";
 import { FetchItem, ItemsState, Status } from "./types";
 
 export const fetchItems = createAsyncThunk<ItemProps[], FetchItem>(
   "users/fetchItemsStatus",
   async ({ activeCat, sortBy, searchValue }) => {
-    const { data } = await axios.get<ItemProps[]>(
-      `https://63c9588d904f040a965c1451.mockapi.io/items${
-        activeCat > 0 ? `?category=${activeCat}&` : `?`
-      }sortby=${sortBy.sort}&order=${sortBy.line}${
-        searchValue !== "" ? `&search=${searchValue}` : ``
-      }`
-    );
-    return data;
+    try {
+      const { data } = await axios.get<ItemProps[]>(
+        `https://63c9588d904f040a965c1451.mockapi.io/items${
+          activeCat > 0 ? `?category=${activeCat}&` : `?`
+        }sortby=${sortBy.sort}&order=${sortBy.line}${
+          searchValue !== "" ? `&search=${searchValue}` : ``
+        }`
+      );
+      return data;
+    } catch (error) {
+      console.error("Error while fetching items: ", error);
+      throw error;
+    }
   }
 );
 

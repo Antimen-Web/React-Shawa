@@ -13,7 +13,7 @@ export const Search: React.FC = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const onClickChange = React.useCallback(
     debounce((str: string) => dispatch(setSearchValue(str)), 200),
-    [setValue]
+    [dispatch]
   );
 
   const onClickClear = (event: React.ChangeEvent<HTMLInputElement>) => {

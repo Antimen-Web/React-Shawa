@@ -7,5 +7,5 @@ export * from "./Item";
 export * from "./Sceleton";
 export * from "./Sort";
 export * from "./LangSwitcher";
-export * from "./StripeContainer";
-export * from "./CheckoutForm";
+export * from "./Payment/StripeContainer";
+export * from "./Payment/CheckoutForm";

@@ -1,24 +1,16 @@
 import { Link } from "react-router-dom";
-import {
-  addCount,
-  removeCount,
-  clearCart,
-  removeItem,
-} from "../redux/cart/slice";
+import { changeCount, clearCart, removeItem } from "../redux/cart/slice";
 import { CartEmpty } from "../components";
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { selectCart } from "../redux/cart/selectors";
 import { t } from "i18next";
+import { calcItemsLength } from "../utils/";
 
 const Cart: React.FC = () => {
   const dispatch = useAppDispatch();
   const { items, totalPrice, typesName, spicyName } =
     useAppSelector(selectCart);
-  let x = 0;
-  const itemsLength = items
-    .map((i: { count: number }) => (x += i.count))
-    .reverse()[0];
 
   if (!totalPrice) {
     return <CartEmpty />;
@@ -123,7 +115,7 @@ const Cart: React.FC = () => {
               <div className="cart__item-meta">
                 <div className="cart__item-count">
                   <div
-                    onClick={() => dispatch(removeCount(item))}
+                    onClick={() => dispatch(changeCount({ item, delta: -1 }))}
                     className="button button--outline button--circle cart__item-count-minus"
                   >
                     <svg
@@ -145,7 +137,7 @@ const Cart: React.FC = () => {
                   </div>
                   <b>{item.count}</b>
                   <div
-                    onClick={() => dispatch(addCount(item))}
+                    onClick={() => dispatch(changeCount({ item, delta: 1 }))}
                     className="button button--outline button--circle cart__item-count-plus"
                   >
                     <svg
@@ -199,14 +191,12 @@ const Cart: React.FC = () => {
         <div className="cart__bottom">
           <div className="cart__bottom-details">
             <span>
-              {" "}
               {t("total_products")}{" "}
               <b>
-                {itemsLength} {t("pcs")}
+                {calcItemsLength(items)} {t("pcs")}
               </b>{" "}
             </span>
             <span>
-              {" "}
               {t("total_price")} <b>{totalPrice} $</b>{" "}
             </span>
           </div>

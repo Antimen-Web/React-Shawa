@@ -2,9 +2,7 @@ import React from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 
-const stripePromise = loadStripe(
-  "pk_test_51MjE7dAsSeWfElezFjZ55ZZ2OLFuiZvqYSYMEb6ZdR9QgCarIhOPKiB1kopADBausmVC2Te4nVNFPpOnSa0jhox000zSrYoRBc"
-);
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY || "");
 
 interface StripeContainerProps {
   children: React.ReactNode;

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { selectCart } from "../redux/cart/selectors";
 import { t } from "i18next";
+import { generateKey, countItemById } from "../utils/";
 
 export type ItemProps = {
   key: string;
@@ -42,10 +43,6 @@ export const Item: React.FC<ItemProps> = ({
     }
   }, [types]);
 
-  const generateKey = (pre: string) => {
-    return `${pre}_${new Date().getTime()}`;
-  };
-
   const onClickAdd = () => {
     spicy &&
       dispatch(
@@ -75,15 +72,6 @@ export const Item: React.FC<ItemProps> = ({
         })
       );
   };
-
-  let countItem = 0;
-
-  items.map((i: { id: string; count: number }) => {
-    if (i.id === id) {
-      countItem += i.count;
-    }
-    return countItem;
-  });
 
   return (
     <div className="pizza-block">
@@ -153,7 +141,7 @@ export const Item: React.FC<ItemProps> = ({
             />
           </svg>
           <span>{t(`add`)}</span>
-          <i>{countItem}</i>
+          <i>{countItemById(items, id)}</i>
         </div>
       </div>
     </div>

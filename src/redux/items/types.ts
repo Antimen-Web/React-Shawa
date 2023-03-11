@@ -1,5 +1,5 @@
 import { SortByType } from "../filter/types";
-import { ItemProps } from "../../components/Item";
+import { ItemProps } from "../../components/";
 
 export type FetchItem = {
   activeCat: number;

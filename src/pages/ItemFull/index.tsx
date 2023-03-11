@@ -8,17 +8,18 @@ import { ItemProps } from "../../components";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { selectCart } from "../../redux/cart/selectors";
 import { t } from "i18next";
+import { generateKey } from "../../utils/";
 
 const ItemFull: React.FC = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [item, setItem] = React.useState<ItemProps>();
-  const { items, typesName, spicyName } = useAppSelector(selectCart);
+  const { typesName, spicyName } = useAppSelector(selectCart);
   const [activeSpicy, activeSpicySet] = React.useState<number>(0);
   const [activeTypes, activeTypesSet] = React.useState<number>(0);
   const [activeSizes, activeSizesSet] = React.useState<number>(0);
-  let [description, setDescription] = React.useState<string>("");
+  const [description, setDescription] = React.useState<string>("");
 
   React.useEffect(() => {
     async function fetchItem() {
@@ -36,38 +37,22 @@ const ItemFull: React.FC = () => {
   }, [id, navigate]);
 
   React.useEffect(() => {
-    if (item) {
-      activeSizesSet(item.sizes && item.sizes[0]);
-      if (item.types) {
-        activeTypesSet(item.types[0]);
-      }
+    activeSizesSet(item?.sizes?.[0] || 0);
+    if (item?.types) {
+      activeTypesSet(item.types[0]);
     }
   }, [item]);
 
   React.useEffect(() => {
-    if (item) {
-      if (item.types) {
-        setDescription(
-          typesName[activeTypes] +
-            ", " +
-            activeSizes +
-            ", " +
-            item.weight +
-            t("gram")
-        );
-      } else {
-        setDescription(spicyName[activeSpicy] + ", " + item.weight + t("gram"));
-      }
-    }
+    const desc = item?.types
+      ? `${typesName[activeTypes]}, ${activeSizes}, ${item.weight}${t("gram")}`
+      : `${spicyName[activeSpicy]}, ${item?.weight}${t("gram")}`;
+    setDescription(desc);
   }, [activeSpicy, activeSizes, activeTypes, item, spicyName, typesName]);
 
   if (!item) {
     return <SceletonItem />;
   }
-
-  const generateKey = (pre: string) => {
-    return `${pre}_${new Date().getTime()}`;
-  };
 
   const onClickAdd = () => {
     item.spicy &&
@@ -104,15 +89,6 @@ const ItemFull: React.FC = () => {
       dispatch(hidePopup());
     }, 2000);
   };
-
-  let countItem = 0;
-
-  items.map((i: { id: string; count: number }) => {
-    if (i.id === id) {
-      countItem += i.count;
-    }
-    return countItem;
-  });
 
   return (
     <div className={styles.item}>
