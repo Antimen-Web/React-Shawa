@@ -63,7 +63,11 @@ export const CheckoutForm: React.FC = () => {
 
   return (
     <div className="container">
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <form
+        className={styles.form}
+        onSubmit={handleSubmit}
+        data-testid="pay_form"
+      >
         <CardElement />
         <button className="button pay-btn" type="submit">
           {t("pay")}

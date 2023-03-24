@@ -21,6 +21,7 @@ export const Popup: React.FC = () => {
         ...fadeOut,
       }}
       className={`${styles.popup} ${popup && styles.active}`}
+      data-testid="popup"
     >
       <span>{t(`added`)}</span>
       <br />

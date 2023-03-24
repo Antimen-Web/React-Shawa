@@ -9,7 +9,7 @@ export const Categories: React.FC = () => {
   const { activeCat, categories } = useAppSelector(selectFilter);
 
   return (
-    <div className="categories">
+    <div className="categories" data-testid="categories">
       <ul>
         {categories.map((value: string, index: number) => (
           <li

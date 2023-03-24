@@ -56,7 +56,7 @@ const Home: React.FC = () => {
   }, [activeCat, sortBy, navigate]);
 
   return (
-    <div className="container">
+    <div className="container" data-testid="homepage">
       <div className="content__top">
         <Categories />
         <Sort />

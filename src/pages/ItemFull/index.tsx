@@ -91,7 +91,7 @@ const ItemFull: React.FC = () => {
   };
 
   return (
-    <div className={styles.item}>
+    <div className={styles.item} data-testid="itemFull">
       <img
         className={styles.image}
         src={"/img/" + item.image}

@@ -16,7 +16,7 @@ const Cart: React.FC = () => {
     return <CartEmpty />;
   }
   return (
-    <div className="container container--cart">
+    <div className="container container--cart" data-testid="cart">
       <div className="cart">
         <div className="cart__top">
           <h2 className="content__title">
@@ -51,7 +51,11 @@ const Cart: React.FC = () => {
             </svg>
             {t("cart")}
           </h2>
-          <div onClick={() => dispatch(clearCart())} className="cart__clear">
+          <div
+            onClick={() => dispatch(clearCart())}
+            className="cart__clear"
+            data-testid="clear_all"
+          >
             <svg
               width="20"
               height="20"
@@ -94,7 +98,7 @@ const Cart: React.FC = () => {
         </div>
         <div className="content__cart">
           {items.map((item) => (
-            <div key={item.key} className="cart__item">
+            <div key={item.key} className="cart__item" data-testid={item.key}>
               <div className="cart__item-title">
                 <div className="cart__item-img">
                   <img
@@ -117,6 +121,7 @@ const Cart: React.FC = () => {
                   <div
                     onClick={() => dispatch(changeCount({ item, delta: -1 }))}
                     className="button button--outline button--circle cart__item-count-minus"
+                    data-testid="decrement"
                   >
                     <svg
                       width="10"
@@ -139,6 +144,7 @@ const Cart: React.FC = () => {
                   <div
                     onClick={() => dispatch(changeCount({ item, delta: 1 }))}
                     className="button button--outline button--circle cart__item-count-plus"
+                    data-testid="increment"
                   >
                     <svg
                       width="10"
@@ -164,6 +170,7 @@ const Cart: React.FC = () => {
                 <div
                   onClick={() => dispatch(removeItem(item))}
                   className="cart__item-remove"
+                  data-testid="remove_item"
                 >
                   <div className="button button--outline button--circle">
                     <svg
@@ -197,13 +204,14 @@ const Cart: React.FC = () => {
               </b>{" "}
             </span>
             <span>
-              {t("total_price")} <b>{totalPrice} $</b>{" "}
+              {t("total_price")} <b data-testid="total_price">{totalPrice} $</b>{" "}
             </span>
           </div>
           <div className="cart__bottom-buttons">
             <Link
               to="/"
               className="button button--outline button--add go-back-btn"
+              data-testid="return_back"
             >
               <svg
                 width="8"
@@ -223,7 +231,7 @@ const Cart: React.FC = () => {
 
               <span>{t("return_back")}</span>
             </Link>
-            <Link to="/payment/">
+            <Link to="/payment/" data-testid="payment">
               <div className="button pay-btn">
                 <span>{t("pay")}</span>
               </div>

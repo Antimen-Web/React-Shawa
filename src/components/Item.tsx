@@ -74,7 +74,7 @@ export const Item: React.FC<ItemProps> = ({
   };
 
   return (
-    <div className="pizza-block">
+    <div className="pizza-block" data-testid="item">
       <Link to={"/item/" + id}>
         <img className="pizza-block__image" src={"/img/" + image} alt={title} />
         <h4 className="pizza-block__title">{title}</h4>

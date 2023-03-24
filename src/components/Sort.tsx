@@ -25,7 +25,7 @@ export const Sort: React.FC = () => {
   }, [handleClick]);
 
   return (
-    <div className="sort" ref={popupRef}>
+    <div className="sort" ref={popupRef} data-testid="sort">
       <div className="sort__label">
         <svg
           width="10"
@@ -40,9 +40,14 @@ export const Sort: React.FC = () => {
           />
         </svg>
         <b>{t(`sort_by`)}</b>
-        <span onClick={() => showPopup(!popup)}>{sortBy.name}</span>
+        <span onClick={() => showPopup(!popup)} data-testid="active_sort">
+          {sortBy.name}
+        </span>
       </div>
-      <div className={popup ? "sort__popup" : "sort__popup collapsed"}>
+      <div
+        className={popup ? "sort__popup" : "sort__popup collapsed"}
+        data-testid="list_sort"
+      >
         <ul>
           {sortByArr.map((obj: SortByType, index: number) => (
             <li

@@ -9,6 +9,7 @@ export const Sceleton: React.FC = () => (
     viewBox="0 0 280 425"
     backgroundColor="#f3f3f3"
     foregroundColor="#ecebeb"
+    data-testid="sceleton"
   >
     <circle cx="140" cy="134" r="130" />
     <rect x="25" y="271" rx="15" ry="15" width="230" height="38" />

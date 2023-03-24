@@ -4,7 +4,7 @@ import { t } from "i18next";
 
 export const CartEmpty: React.FC = () => {
   return (
-    <div className="cart cart--empty">
+    <div className="cart cart--empty" data-testid="cart-empty">
       <h2>{t(`empty_cart_title`)}</h2>
       <p>
         {t(`empty_cart_text1`)}

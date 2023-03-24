@@ -12,6 +12,7 @@ const SceletonItem: React.FC = () => (
       backgroundColor="#f3f3f3"
       foregroundColor="#ecebeb"
       className={styles.svg}
+      data-testid="skeletonItem"
     >
       <circle cx="130" cy="130" r="130" />
       <rect x="288" y="10" rx="10" ry="10" width="231" height="36" />

@@ -3,7 +3,7 @@ import { FilterState, SortByType } from "./types";
 import { t } from "i18next";
 import "../../i18n";
 
-const initialState: FilterState = {
+export const initialState: FilterState = {
   sortByArr: [
     { name: t("popular") + " ↓", sort: "rating", line: "desc" },
     { name: t("popular") + " ↑", sort: "rating", line: "asc" },
@@ -33,7 +33,7 @@ export const filterSlice = createSlice({
     },
     setFilters(
       state,
-      action: PayloadAction<{ activeCat: string; sortBy: SortByType }>
+      action: PayloadAction<{ activeCat: string | number; sortBy: SortByType }>
     ) {
       state.activeCat = Number(action.payload.activeCat);
       state.sortBy = action.payload.sortBy;
