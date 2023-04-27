@@ -1,6 +1,6 @@
 # React-Shawa
 
-## Demo: bespoke-scone-ed21f0.netlify.app
+## Demo: react-shawa.vercel.app
 
 This is a fast food ordering application built with: 
 - ReactJS 18
